@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
             if (imageBitmap != null) {
                 val mImageView = findViewById<ImageView>(R.id.iv_taken_image)
                 mImageView.setImageBitmap(imageBitmap)
+
+                detector(imageBitmap)
             }
 
         }
@@ -87,15 +89,19 @@ class MainActivity : AppCompatActivity() {
                             val latitude = loc.latitude
                             val longitude = loc.longitude
 
-                            Log.v("detector", "latitude: " + java.lang.Double.toString(latitude))
-                            Log.v("detector", "longitude: " + java.lang.Double.toString(longitude))
+                            Log.v("detector", "latitude: $latitude")
+                            Log.v("detector", "longitude: $longitude")
 
                         }
+
+                        Toast.makeText(this@MainActivity,
+                                "Success", Toast.LENGTH_SHORT).show()
                     }
                 }
                 .addOnFailureListener { e ->
                     // Task failed with an exception
                     Log.e("Landmark", e.message)
+
                     Toast.makeText(this@MainActivity,
                             e.message, Toast.LENGTH_LONG).show()
                 }
