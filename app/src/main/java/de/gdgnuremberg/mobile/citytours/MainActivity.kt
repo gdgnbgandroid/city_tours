@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val REQUEST_IMAGE_CAPTURE = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,7 +51,6 @@ class MainActivity : AppCompatActivity() {
 
                 detector(imageBitmap)
             }
-
         }
     }
 
@@ -72,26 +69,17 @@ class MainActivity : AppCompatActivity() {
         val detector = FirebaseVision.getInstance()
                 .visionCloudLandmarkDetector
 
-        val result = detector.detectInImage(image)
+        detector.detectInImage(image)
                 .addOnSuccessListener { firebaseVisionCloudLandmarks ->
                     for (landmark in firebaseVisionCloudLandmarks) {
-
-                        val bounds = landmark.boundingBox
                         val landmarkName = landmark.landmark
-                        val entityId = landmark.entityId
-                        val confidence = landmark.confidence
                         Log.v("detector", "bounds: $landmarkName")
-                        Log.v("detector", "entityId: $entityId")
 
                         // Multiple locations are possible, e.g., the location of the depicted
                         // landmark and the location the picture was taken.
                         for (loc in landmark.locations) {
-                            val latitude = loc.latitude
-                            val longitude = loc.longitude
-
-                            Log.v("detector", "latitude: $latitude")
-                            Log.v("detector", "longitude: $longitude")
-
+                            Log.v("detector", "latitude: ${loc.latitude}")
+                            Log.v("detector", "longitude: ${loc.longitude}")
                         }
 
                         Toast.makeText(this@MainActivity,
@@ -105,7 +93,9 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity,
                             e.message, Toast.LENGTH_LONG).show()
                 }
-
     }
 
+    companion object {
+        const val REQUEST_IMAGE_CAPTURE = 1
+    }
 }
