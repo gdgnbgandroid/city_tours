@@ -1,23 +1,18 @@
 package de.gdgnuremberg.mobile.citytours
 
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.ml.vision.FirebaseVision
-import com.google.firebase.ml.vision.cloud.landmark.FirebaseVisionCloudLandmark
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -101,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     // Task failed with an exception
                     Log.e("Landmark", e.message)
-                    Toast.makeText(this@LandmarkDetector,
+                    Toast.makeText(this@MainActivity,
                             e.message, Toast.LENGTH_LONG).show()
                 }
 
